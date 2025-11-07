@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WanderDharsh - Explore Your Next Adventure</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    
+    * {
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .gradient-bg {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    }
+    
+    .hero-gradient {
+      background: linear-gradient(135deg, #fa8bff 0%, #2bd2ff 50%, #2bff88 100%);
+    }
+    
+    .glass-effect {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .card-hover:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+    
+    .section {
+      animation: fadeIn 0.5s ease-in-out;
+      min-height: calc(100vh - 160px);
+      padding: 4rem 0;
+    }
+
+    .section-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .hero-section {
+      min-height: calc(100vh - 160px);
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .nav-item {
+      position: relative;
+      padding: 8px 20px;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      background: transparent;
+    }
+    
+    .nav-item:hover {
+      background: linear-gradient(135deg, rgba(250, 139, 255, 0.1), rgba(43, 210, 255, 0.1));
+      transform: translateY(-2px);
+    }
+    
+    .nav-item.active {
+      background: linear-gradient(135deg, #fa8bff, #2bd2ff);
+      color: white !important;
+      box-shadow: 0 4px 15px rgba(250, 139, 255, 0.4);
+    }
+    
+    .floating-nav {
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 8px 40px rgba(160, 82, 245, 0.15);
+      border: 1px solid rgba(250, 139, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .btn-gradient {
+      background: linear-gradient(135deg, #fa8bff 0%, #2bd2ff 100%);
+      transition: all 0.3s ease;
+    }
+    
+    .btn-gradient:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(250, 139, 255, 0.4);
+    }
+    
+    .mobile-menu {
+      transform: translateX(-100%);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      background: linear-gradient(135deg, rgba(250, 139, 255, 0.05), rgba(43, 210, 255, 0.05));
+    }
+    
+    .mobile-menu.active {
+      transform: translateX(0);
+    }
+    
+    .mobile-nav-item {
+      padding: 12px 30px;
+      border-radius: 20px;
+      transition: all 0.3s ease;
+    }
+    
+    .mobile-nav-item:hover {
+      background: linear-gradient(135deg, #fa8bff, #2bd2ff);
+      color: white;
+      transform: translateX(10px);
+    }
+    
+    .logo-container {
+      transition: all 0.3s ease;
+    }
+    
+    .logo-container:hover {
+      transform: scale(1.1) rotate(5deg);
+    }
+    
+    .category-card {
+      background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .category-card:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 32px 64px rgba(0, 0, 0, 0.15);
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900 overflow-x-hidden">
+
+  <!-- Modern Floating Navigation -->
+  <header class="fixed top-0 left-0 right-0 z-50 px-4 pt-4">
+    <nav class="floating-nav rounded-3xl px-8 py-4 max-w-7xl mx-auto">
+      <div class="flex justify-between items-center">
+        <div class="flex items-center space-x-3 logo-container">
+          <div class="w-12 h-12 bg-gradient-to-br from-purple-500 via-pink-500 to-cyan-500 rounded-2xl flex items-center justify-center shadow-lg">
+            <i class="fas fa-mountain text-white text-xl"></i>
+          </div>
+          <h1 class="text-2xl font-extrabold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+            Wander<span class="text-cyan-500">Dharsh</span>
+          </h1>
+        </div>
+        
+        <!-- Desktop Navigation -->
+        <ul class="hidden md:flex items-center space-x-2 font-semibold">
+          <li><button type="button" data-section="home" class="nav-item text-gray-700 flex items-center"><i class="fas fa-home mr-2"></i>Home</button></li>
+          <li><button type="button" data-section="trips" class="nav-item text-gray-700 flex items-center"><i class="fas fa-map-marked-alt mr-2"></i>Trips</button></li>
+          <li><button type="button" data-section="booking" class="nav-item text-gray-700 flex items-center"><i class="fas fa-calendar-check mr-2"></i>Book</button></li>
+          <li><button type="button" data-section="about" class="nav-item text-gray-700 flex items-center"><i class="fas fa-info-circle mr-2"></i>About</button></li>
+          <li><button type="button" data-section="contact" class="nav-item text-gray-700 flex items-center"><i class="fas fa-envelope mr-2"></i>Contact</button></li>
+        </ul>
+        
+        <!-- Mobile Menu Button -->
+        <button class="md:hidden text-3xl p-2 rounded-xl hover:bg-purple-50 transition-all" data-mobile-toggle>
+          <i class="fas fa-bars text-purple-600"></i>
+        </button>
+      </div>
+    </nav>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu md:hidden fixed top-0 left-0 w-full h-full z-40">
+      <div class="flex flex-col items-center justify-center h-full">
+        <button class="absolute top-8 right-8 text-3xl p-2 rounded-full hover:bg-purple-100 transition-all" data-mobile-toggle>
+          <i class="fas fa-times text-purple-600"></i>
+        </button>
+        <ul class="flex flex-col items-center space-y-6 text-2xl font-bold">
+          <li><button type="button" data-section="home" class="nav-item mobile-nav-item text-gray-800 flex items-center"><i class="fas fa-home mr-3"></i>Home</button></li>
+          <li><button type="button" data-section="trips" class="nav-item mobile-nav-item text-gray-800 flex items-center"><i class="fas fa-map-marked-alt mr-3"></i>Trips</button></li>
+          <li><button type="button" data-section="booking" class="nav-item mobile-nav-item text-gray-800 flex items-center"><i class="fas fa-calendar-check mr-3"></i>Book</button></li>
+          <li><button type="button" data-section="about" class="nav-item mobile-nav-item text-gray-800 flex items-center"><i class="fas fa-info-circle mr-3"></i>About</button></li>
+          <li><button type="button" data-section="contact" class="nav-item mobile-nav-item text-gray-800 flex items-center"><i class="fas fa-envelope mr-3"></i>Contact</button></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="pt-32">
+  <!-- Home Section -->
+  <section id="home" class="section hero-section hero-gradient flex items-center justify-center text-white relative overflow-hidden" aria-hidden="false">
+    <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+    <div class="container mx-auto px-6 text-center relative z-10">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-6xl md:text-7xl font-extrabold mb-6 leading-tight">
+          Discover, Travel & 
+          <span class="bg-gradient-to-r from-purple-600 to-cyan-600 bg-clip-text text-transparent">Explore</span>
+        </h2>
+        <p class="text-xl md:text-2xl mb-8 opacity-90 leading-relaxed">
+          College, Family, Friends or Honeymoon — WanderDharsh crafts your perfect adventure with modern experiences and unforgettable memories.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <button type="button" data-section="booking" class="btn-gradient px-8 py-4 rounded-2xl font-semibold text-lg shadow-lg hover:shadow-xl flex items-center">
+            <i class="fas fa-plane mr-2"></i>Book Your Adventure
+          </button>
+          <button type="button" data-section="trips" class="glass-effect px-8 py-4 rounded-2xl font-semibold text-lg hover:bg-white hover:bg-opacity-20 flex items-center">
+            <i class="fas fa-compass mr-2"></i>Explore Trips
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Floating Elements -->
+    <div class="absolute top-20 left-10 w-20 h-20 bg-purple-300 bg-opacity-20 rounded-full animate-bounce"></div>
+    <div class="absolute bottom-20 right-10 w-16 h-16 bg-cyan-300 bg-opacity-30 rounded-full animate-pulse"></div>
+    <div class="absolute top-1/2 right-20 w-12 h-12 bg-pink-300 bg-opacity-25 rounded-full animate-ping"></div>
+  </section>
+
+  <!-- Trips Section -->
+  <section id="trips" class="section bg-gradient-to-br from-purple-50 to-cyan-50 hidden" aria-hidden="true">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-6">
+          Explore Our Trip Categories
+        </h2>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+          From college adventures to romantic getaways, we have the perfect trip for every occasion and every dreamer.
+        </p>
+      </div>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <!-- College Trips -->
+        <div class="category-card rounded-3xl overflow-hidden card-hover">
+          <div class="relative">
+            <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80" alt="College Trip" class="w-full h-64 object-cover">
+            <div class="absolute top-4 right-4 bg-purple-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+              Popular
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-bold text-2xl mb-3 text-gray-800">College Trips</h3>
+            <p class="text-gray-600 mb-4 leading-relaxed">Fun-filled group adventures for college students. Experience freedom, friendship, and unforgettable memories!</p>
+            <div class="flex items-center justify-between">
+              <span class="text-purple-600 font-semibold">Starting ₹2,999</span>
+              <button type="button" data-section="booking" class="bg-purple-600 text-white px-4 py-2 rounded-xl hover:bg-purple-700 transition-colors">
+                <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- School Trips -->
+        <div class="category-card rounded-3xl overflow-hidden card-hover">
+          <div class="relative">
+            <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?w=800&q=80" alt="School Trip" class="w-full h-64 object-cover">
+            <div class="absolute top-4 right-4 bg-cyan-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+              Safe
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-bold text-2xl mb-3 text-gray-800">School Trips</h3>
+            <p class="text-gray-600 mb-4 leading-relaxed">Safe, exciting, and educational tours designed specifically for students and schools.</p>
+            <div class="flex items-center justify-between">
+              <span class="text-cyan-600 font-semibold">Starting ₹1,999</span>
+              <button type="button" data-section="booking" class="bg-cyan-600 text-white px-4 py-2 rounded-xl hover:bg-cyan-700 transition-colors">
+                <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- IV Trips -->
+        <div class="category-card rounded-3xl overflow-hidden card-hover">
+          <div class="relative">
+            <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80" alt="IV Trip" class="w-full h-64 object-cover">
+          </div>
+          <div class="p-6">
+            <h3 class="font-bold text-2xl mb-3 text-gray-800">College IV Trips</h3>
+            <p class="text-gray-600 mb-4 leading-relaxed">Industrial visits combined with learning, travel, and memorable experiences for students.</p>
+            <div class="flex items-center justify-between">
+              <span class="text-indigo-600 font-semibold">Starting ₹3,499</span>
+              <button type="button" data-section="booking" class="bg-indigo-600 text-white px-4 py-2 rounded-xl hover:bg-indigo-700 transition-colors">
+                <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Family Trips -->
+        <div class="category-card rounded-3xl overflow-hidden card-hover">
+          <div class="relative">
+            <img src="https://images.unsplash.com/photo-1580541832626-2a7131ee809f?w=800&q=80" alt="Family Trip" class="w-full h-64 object-cover">
+            <div class="absolute top-4 right-4 bg-pink-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+              Family
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-bold text-2xl mb-3 text-gray-800">Family Trips</h3>
+            <p class="text-gray-600 mb-4 leading-relaxed">Relax and reconnect with your loved ones on peaceful family getaways and adventures.</p>
+            <div class="flex items-center justify-between">
+              <span class="text-pink-600 font-semibold">Starting ₹4,999</span>
+              <button type="button" data-section="booking" class="bg-pink-600 text-white px-4 py-2 rounded-xl hover:bg-pink-700 transition-colors">
+                <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Friends Trips -->
+        <div class="category-card rounded-3xl overflow-hidden card-hover">
+          <div class="relative">
+            <img src="https://images.unsplash.com/photo-1551641506-ee5bf4cb45f1?w=800&q=80" alt="Friends Trip" class="w-full h-64 object-cover">
+            <div class="absolute top-4 right-4 bg-fuchsia-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+              Adventure
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-bold text-2xl mb-3 text-gray-800">Friends Trips</h3>
+            <p class="text-gray-600 mb-4 leading-relaxed">Adventure and laughter-filled trips to create memories that will last forever with your squad.</p>
+            <div class="flex items-center justify-between">
+              <span class="text-fuchsia-600 font-semibold">Starting ₹3,999</span>
+              <button type="button" data-section="booking" class="bg-fuchsia-600 text-white px-4 py-2 rounded-xl hover:bg-fuchsia-700 transition-colors">
+                <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Marriage & Honeymoon -->
+        <div class="category-card rounded-3xl overflow-hidden card-hover">
+          <div class="relative">
+            <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=800&q=80" alt="Marriage Trip" class="w-full h-64 object-cover">
+            <div class="absolute top-4 right-4 bg-rose-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+              Luxury
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-bold text-2xl mb-3 text-gray-800">Marriage & Honeymoon</h3>
+            <p class="text-gray-600 mb-4 leading-relaxed">Celebrate love and new beginnings with luxury honeymoon destinations and romantic experiences.</p>
+            <div class="flex items-center justify-between">
+              <span class="text-rose-600 font-semibold">Starting ₹12,999</span>
+              <button type="button" data-section="booking" class="bg-rose-600 text-white px-4 py-2 rounded-xl hover:bg-rose-700 transition-colors">
+                <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking Section -->
+  <section id="booking" class="section gradient-bg hidden" aria-hidden="true">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-5xl font-bold text-white mb-6">Book Your Dream Trip</h2>
+        <p class="text-xl text-white opacity-90 max-w-2xl mx-auto">
+          Ready for your next adventure? Fill out the form below and let us create the perfect travel experience for you.
+        </p>
+      </div>
+      
+      <div class="max-w-2xl mx-auto">
+        <form class="glass-effect p-8 md:p-12 rounded-3xl">
+          <div class="grid md:grid-cols-2 gap-6 mb-6">
+            <div>
+              <label class="block text-white font-semibold mb-2">Full Name</label>
+              <input type="text" placeholder="Enter your full name" 
+                     class="w-full p-4 rounded-2xl bg-white bg-opacity-20 text-white placeholder-white placeholder-opacity-70 border border-white border-opacity-30 focus:ring-2 focus:ring-white focus:ring-opacity-50 focus:outline-none">
+            </div>
+            <div>
+              <label class="block text-white font-semibold mb-2">Email Address</label>
+              <input type="email" placeholder="your@email.com" 
+                     class="w-full p-4 rounded-2xl bg-white bg-opacity-20 text-white placeholder-white placeholder-opacity-70 border border-white border-opacity-30 focus:ring-2 focus:ring-white focus:ring-opacity-50 focus:outline-none">
+            </div>
+          </div>
+          
+          <div class="grid md:grid-cols-2 gap-6 mb-6">
+            <div>
+              <label class="block text-white font-semibold mb-2">Phone Number</label>
+              <input type="tel" placeholder="+91 98765 43210" 
+                     class="w-full p-4 rounded-2xl bg-white bg-opacity-20 text-white placeholder-white placeholder-opacity-70 border border-white border-opacity-30 focus:ring-2 focus:ring-white focus:ring-opacity-50 focus:outline-none">
+            </div>
+            <div>
+              <label class="block text-white font-semibold mb-2">Trip Type</label>
+              <select class="w-full p-4 rounded-2xl bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:ring-2 focus:ring-white focus:ring-opacity-50 focus:outline-none">
+                <option value="">Select Trip Type</option>
+                <option value="college">College Trip</option>
+                <option value="school">School Trip</option>
+                <option value="iv">IV Trip</option>
+                <option value="family">Family Trip</option>
+                <option value="friends">Friends Trip</option>
+                <option value="marriage">Marriage Trip</option>
+                <option value="honeymoon">Honeymoon</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="grid md:grid-cols-2 gap-6 mb-6">
+            <div>
+              <label class="block text-white font-semibold mb-2">Preferred Date</label>
+              <input type="date" 
+                     class="w-full p-4 rounded-2xl bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:ring-2 focus:ring-white focus:ring-opacity-50 focus:outline-none">
+            </div>
+            <div>
+              <label class="block text-white font-semibold mb-2">Number of People</label>
+              <input type="number" placeholder="4" min="1" 
+                     class="w-full p-4 rounded-2xl bg-white bg-opacity-20 text-white placeholder-white placeholder-opacity-70 border border-white border-opacity-30 focus:ring-2 focus:ring-white focus:ring-opacity-50 focus:outline-none">
+            </div>
+          </div>
+          
+          <div class="mb-6">
+            <label class="block text-white font-semibold mb-2">Special Requirements</label>
+            <textarea rows="4" placeholder="Tell us about any special requirements or preferences..." 
+                      class="w-full p-4 rounded-2xl bg-white bg-opacity-20 text-white placeholder-white placeholder-opacity-70 border border-white border-opacity-30 focus:ring-2 focus:ring-white focus:ring-opacity-50 focus:outline-none resize-none"></textarea>
+          </div>
+          
+          <button type="submit" class="w-full bg-white text-pink-600 px-8 py-4 rounded-2xl font-bold text-lg hover:bg-opacity-90 transition-all hover:transform hover:scale-105 shadow-lg">
+            <i class="fas fa-paper-plane mr-2"></i>Submit Booking Request
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="section bg-white hidden" aria-hidden="true">
+    <div class="container mx-auto px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-6">
+            About WanderDharsh
+          </h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Your trusted travel companion for creating extraordinary memories and unforgettable adventures across India and beyond.
+          </p>
+        </div>
+        
+        <div class="grid lg:grid-cols-2 gap-12 items-center mb-16">
+          <div>
+            <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&q=80" alt="About Us" class="rounded-3xl shadow-2xl w-full h-96 object-cover">
+          </div>
+          <div>
+            <h3 class="text-3xl font-bold text-gray-800 mb-6">Our Story</h3>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              WanderDharsh was born from a passion for exploration and a desire to make travel accessible to everyone. Whether you're a college student looking for adventure, a family seeking quality time, or a couple planning your dream honeymoon, we craft personalized experiences that exceed expectations.
+            </p>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              With years of experience in the travel industry, we understand that every journey is unique. That's why we go beyond cookie-cutter packages to create tailor-made adventures that reflect your personality, interests, and budget.
+            </p>
+            <div class="flex items-center space-x-4">
+              <div class="text-center">
+                <div class="text-3xl font-bold text-purple-600">500+</div>
+                <div class="text-gray-500">Happy Travelers</div>
+              </div>
+              <div class="text-center">
+                <div class="text-3xl font-bold text-cyan-600">50+</div>
+                <div class="text-gray-500">Destinations</div>
+              </div>
+              <div class="text-center">
+                <div class="text-3xl font-bold text-pink-600">5+</div>
+                <div class="text-gray-500">Years Experience</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="text-center p-6 rounded-2xl bg-purple-50 hover:bg-purple-100 transition-colors">
+            <div class="w-16 h-16 bg-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <i class="fas fa-shield-alt text-white text-2xl"></i>
+            </div>
+            <h4 class="font-bold text-xl mb-3 text-gray-800">Safe & Secure</h4>
+            <p class="text-gray-600">Your safety is our priority. All our trips are planned with comprehensive safety measures and experienced guides.</p>
+          </div>
+          
+          <div class="text-center p-6 rounded-2xl bg-cyan-50 hover:bg-cyan-100 transition-colors">
+            <div class="w-16 h-16 bg-cyan-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <i class="fas fa-star text-white text-2xl"></i>
+            </div>
+            <h4 class="font-bold text-xl mb-3 text-gray-800">Premium Quality</h4>
+            <p class="text-gray-600">We partner with the best hotels, restaurants, and local guides to ensure you get premium experiences at great value.</p>
+          </div>
+          
+          <div class="text-center p-6 rounded-2xl bg-pink-50 hover:bg-pink-100 transition-colors">
+            <div class="w-16 h-16 bg-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <i class="fas fa-headset text-white text-2xl"></i>
+            </div>
+            <h4 class="font-bold text-xl mb-3 text-gray-800">24/7 Support</h4>
+            <p class="text-gray-600">Our dedicated support team is available round the clock to assist you before, during, and after your trip.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section bg-gradient-to-br from-gray-900 to-purple-900 text-white hidden" aria-hidden="true">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-5xl font-bold mb-6">Get in Touch</h2>
+        <p class="text-xl opacity-90 max-w-2xl mx-auto">
+          Have questions or need help planning your next adventure? We're here to help make your travel dreams come true.
+        </p>
+      </div>
+      
+      <div class="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+        <div>
+          <h3 class="text-3xl font-bold mb-8">Contact Information</h3>
+          <div class="space-y-6">
+            <div class="flex items-center space-x-4">
+              <div class="w-12 h-12 bg-purple-600 rounded-xl flex items-center justify-center">
+                <i class="fas fa-envelope text-white"></i>
+              </div>
+              <div>
+                <div class="font-semibold">Email</div>
+                <a href="mailto:info@wanderdharsh.com" class="text-purple-300 hover:text-purple-200">info@wanderdharsh.com</a>
+              </div>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+              <div class="w-12 h-12 bg-cyan-600 rounded-xl flex items-center justify-center">
+                <i class="fas fa-phone text-white"></i>
+              </div>
+              <div>
+                <div class="font-semibold">Phone</div>
+                <a href="tel:+919876543210" class="text-cyan-300 hover:text-cyan-200">+91 98765 43210</a>
+              </div>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+              <div class="w-12 h-12 bg-pink-600 rounded-xl flex items-center justify-center">
+                <i class="fas fa-map-marker-alt text-white"></i>
+              </div>
+              <div>
+                <div class="font-semibold">Office</div>
+                <div class="text-gray-300">Bangalore, Karnataka, India</div>
+              </div>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+              <div class="w-12 h-12 bg-fuchsia-600 rounded-xl flex items-center justify-center">
+                <i class="fas fa-clock text-white"></i>
+              </div>
+              <div>
+                <div class="font-semibold">Working Hours</div>
+                <div class="text-gray-300">Mon - Sat: 9:00 AM - 8:00 PM</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mt-8">
+            <h4 class="font-bold text-xl mb-4">Follow Us</h4>
+            <div class="flex space-x-4">
+              <a href="https://www.facebook.com/WanderDharsh" target="_blank" rel="noopener noreferrer" class="w-12 h-12 bg-purple-600 rounded-xl flex items-center justify-center hover:bg-purple-700 transition-colors">
+                <i class="fab fa-facebook-f text-white"></i>
+              </a>
+              <a href="https://www.instagram.com/WanderDharsh" target="_blank" rel="noopener noreferrer" class="w-12 h-12 bg-pink-600 rounded-xl flex items-center justify-center hover:bg-pink-700 transition-colors">
+                <i class="fab fa-instagram text-white"></i>
+              </a>
+              <a href="https://twitter.com/WanderDharsh" target="_blank" rel="noopener noreferrer" class="w-12 h-12 bg-cyan-400 rounded-xl flex items-center justify-center hover:bg-cyan-500 transition-colors">
+                <i class="fab fa-twitter text-white"></i>
+              </a>
+              <a href="https://www.youtube.com/@WanderDharsh" target="_blank" rel="noopener noreferrer" class="w-12 h-12 bg-rose-600 rounded-xl flex items-center justify-center hover:bg-rose-700 transition-colors">
+                <i class="fab fa-youtube text-white"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <form class="glass-effect p-8 rounded-3xl">
+            <h3 class="text-2xl font-bold mb-6">Send us a Message</h3>
+            <div class="space-y-4">
+              <input type="text" placeholder="Your Name" 
+                     class="w-full p-4 rounded-2xl bg-white bg-opacity-10 text-white placeholder-white placeholder-opacity-70 border border-white border-opacity-20 focus:ring-2 focus:ring-purple-400 focus:outline-none">
+              <input type="email" placeholder="Your Email" 
+                     class="w-full p-4 rounded-2xl bg-white bg-opacity-10 text-white placeholder-white placeholder-opacity-70 border border-white border-opacity-20 focus:ring-2 focus:ring-purple-400 focus:outline-none">
+              <input type="text" placeholder="Subject" 
+                     class="w-full p-4 rounded-2xl bg-white bg-opacity-10 text-white placeholder-white placeholder-opacity-70 border border-white border-opacity-20 focus:ring-2 focus:ring-purple-400 focus:outline-none">
+              <textarea rows="5" placeholder="Your Message" 
+                        class="w-full p-4 rounded-2xl bg-white bg-opacity-10 text-white placeholder-white placeholder-opacity-70 border border-white border-opacity-20 focus:ring-2 focus:ring-blue-400 focus:outline-none resize-none"></textarea>
+              <button type="submit" class="w-full btn-gradient px-6 py-4 rounded-2xl font-bold text-lg hover:transform hover:scale-105 transition-all">
+                <i class="fas fa-paper-plane mr-2"></i>Send Message
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <!-- Modern Footer -->
+  <footer class="bg-gray-900 text-white py-8">
+    <div class="container mx-auto px-6 text-center">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-4 md:mb-0">
+          <p class="text-gray-400">© 2025 WanderDharsh. Designed with ❤️ by <span class="font-semibold text-white">Dharshan V</span>. All rights reserved.</p>
+        </div>
+        <div class="flex space-x-6 text-sm text-gray-400">
+          <a href="https://wanderdharsh.com/privacy" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Privacy Policy</a>
+          <a href="https://wanderdharsh.com/terms" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Terms of Service</a>
+          <a href="https://wanderdharsh.com/cancellation" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Cancellation Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const mobileToggles = document.querySelectorAll('[data-mobile-toggle]');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const sections = document.querySelectorAll('.section');
+    const navItems = document.querySelectorAll('.nav-item[data-section]');
+    const sectionTriggers = document.querySelectorAll('[data-section]');
+
+    const sectionTitles = {
+      home: 'Home',
+      trips: 'Trips',
+      booking: 'Booking',
+      about: 'About',
+      contact: 'Contact'
+    };
+
+    const toggleMobileMenu = () => {
+      if (!mobileMenu) return;
+      mobileMenu.classList.toggle('active');
+    };
+
+    const closeMobileMenu = () => {
+      if (!mobileMenu) return;
+      mobileMenu.classList.remove('active');
+    };
+
+    const setDocumentTitle = (id) => {
+      const base = 'WanderDharsh';
+      const label = sectionTitles[id] || 'Explore';
+      document.title = `${base} • ${label}`;
+    };
+
+    const updateHash = (id) => {
+      if (window.location.hash === `#${id}`) return;
+      if (history.replaceState) {
+        history.replaceState(null, '', `#${id}`);
+      } else {
+        window.location.hash = `#${id}`;
+      }
+    };
+
+    const showSection = (id) => {
+      const targetSection = Array.from(sections).find(section => section.id === id);
+      if (!targetSection) {
+        return;
+      }
+
+      sections.forEach(section => {
+        const isActive = section.id === id;
+        section.classList.toggle('hidden', !isActive);
+        section.setAttribute('aria-hidden', (!isActive).toString());
+        if (isActive) {
+          section.scrollTop = 0;
+        }
+      });
+
+      navItems.forEach(item => {
+        const isActive = item.dataset.section === id;
+        item.classList.toggle('active', isActive);
+        item.setAttribute('aria-current', isActive ? 'page' : 'false');
+      });
+
+      setDocumentTitle(id);
+      updateHash(id);
+    };
+
+    mobileToggles.forEach(toggle => {
+      toggle.addEventListener('click', toggleMobileMenu);
+    });
+
+    sectionTriggers.forEach(trigger => {
+      trigger.addEventListener('click', (event) => {
+        const target = trigger.dataset.section;
+        if (!target) return;
+
+        if (trigger.tagName === 'A') {
+          event.preventDefault();
+        }
+
+        showSection(target);
+        closeMobileMenu();
+      });
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const initialHash = window.location.hash.replace('#', '');
+      const initialSection = sectionTitles[initialHash] ? initialHash : 'home';
+      showSection(initialSection);
+    });
+
+    window.addEventListener('hashchange', () => {
+      const hash = window.location.hash.replace('#', '');
+      if (sectionTitles[hash]) {
+        showSection(hash);
+        closeMobileMenu();
+      }
+    });
+
+    document.querySelectorAll('form').forEach(form => {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Thank you for your submission! We will get back to you soon.');
+      });
+    });
+  </script>
+</body>
+</html>
